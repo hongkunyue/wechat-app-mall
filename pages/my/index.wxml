@@ -74,7 +74,7 @@
 
   <block wx:if="{{vipLevel > 0}}">
     <view class="space"></view>
-    <navigator wx:if="{{!apiUserInfoMap.base.isSeller}}" url="/pages/fx/apply-status">
+    <!-- <navigator wx:if="{{!apiUserInfoMap.base.isSeller}}" url="/pages/fx/apply-status">
       <view class="menu-item">
         <view class="l">成为分销商</view>
         <image class="next" src="/images/icon/next.png"></image>
@@ -85,7 +85,7 @@
         <view class="l">分销中心</view>
         <image class="next" src="/images/icon/next.png"></image>
       </view>
-    </navigator>
+    </navigator> -->
     <view wx:if="{{apiUserInfoMap.base.isSeller}}" class="line"></view>
     <navigator wx:if="{{apiUserInfoMap.base.isSeller}}" url="/pages/fx/members">
       <view class="menu-item">
@@ -117,17 +117,17 @@
     </view>
   </navigator>
 
-  <view class="space"></view>
-  <navigator url="/pages/maidan/index">
+  <!-- <view class="space"></view> -->
+  <!-- <navigator url="/pages/maidan/index">
     <view class="menu-item">
       <view class="l">优惠买单</view>
       <image class="next" src="/images/icon/next.png"></image>
     </view>
   </navigator>
-  <view class="line"></view>
+  <view class="line"></view> -->
   <navigator url="/pages/asset/index">
     <view class="menu-item">
-      <view class="l">资金明细</view>
+      <view class="l">交易记录</view>
       <image class="next" src="/images/icon/next.png"></image>
     </view>
   </navigator>
@@ -190,8 +190,6 @@
     <image class="next" src="/images/icon/next.png"></image>
   </view> -->
   
-  <view class="space"></view>
-  <view class="version">Powered by EastWorld v {{version}}</view>
   <view class="space"></view>
 </view>
 

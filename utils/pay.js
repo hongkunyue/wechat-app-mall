@@ -12,8 +12,7 @@ function wxpay(type, money, orderId, redirectUrl, data) {
   }
   if (type === 'order') {
     postData.remark = "支付订单 ：" + orderId;
-    postData.nextAction = {
-      type: 0,
+    postData.nextAction = {type: 0,
       id: orderId
     };
   }
@@ -30,6 +29,7 @@ function wxpay(type, money, orderId, redirectUrl, data) {
     postData.nextAction = JSON.stringify(postData.nextAction);  
   }
   WXAPI.wxpay(postData).then(function (res) {
+    debugger;
     if (res.code == 0) {
       // 发起支付
       wx.requestPayment({

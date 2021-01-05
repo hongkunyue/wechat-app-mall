@@ -1,6 +1,6 @@
 const WXAPI = require('apifm-wxapi')
 
-async function checkSession(){
+async function checkSession() {
   return new Promise((resolve, reject) => {
     wx.checkSession({
       success() {
@@ -32,15 +32,15 @@ async function checkHasLogined() {
   return true
 }
 
-async function login(page){
+async function login(page) {
   const _this = this
   wx.login({
     success: function (res) {
-      WXAPI.login_wx(res.code).then(function (res) {        
+      WXAPI.login_wx(res.code).then(function (res) {
         if (res.code == 10000) {
           // 去注册
           //_this.register(page)
-          return;
+          return
         }
         if (res.code != 0) {
           // 登录错误
@@ -49,11 +49,11 @@ async function login(page){
             content: res.msg,
             showCancel: false
           })
-          return;
+          return
         }
         wx.setStorageSync('token', res.data.token)
         wx.setStorageSync('uid', res.data.uid)
-        if ( page ) {
+        if (page) {
           page.onShow()
         }
       })
@@ -62,27 +62,33 @@ async function login(page){
 }
 
 async function register(page) {
-  let _this = this;
+  let _this = this
   wx.login({
     success: function (res) {
-      let code = res.code; // 微信登录接口返回的 code 参数，下面注册接口需要用到
+      let code = res.code // 微信登录接口返回的 code 参数，下面注册接口需要用到
       wx.getUserInfo({
         success: function (res) {
-          let iv = res.iv;
-          let encryptedData = res.encryptedData;
+          let iv = res.iv
+          let encryptedData = res.encryptedData
           let referrer = '' // 推荐人
-          let referrer_storge = wx.getStorageSync('referrer');
+          let referrer_storge = wx.getStorageSync('referrer')
           if (referrer_storge) {
-            referrer = referrer_storge;
+            referrer = referrer_storge
           }
           // 下面开始调用注册接口
           WXAPI.register_complex({
             code: code,
             encryptedData: encryptedData,
             iv: iv,
-            referrer: referrer
+            referrer: referrer,
+            postJsonString: JSON.stringify({
+              score: 0,
+              accountBalance: 0,
+              point: 0
+            })
           }).then(function (res) {
-            _this.login(page);
+            console.log('reg', res)
+            _this.login(page)
           })
         }
       })
@@ -90,7 +96,7 @@ async function register(page) {
   })
 }
 
-function loginOut(){
+function loginOut() {
   wx.removeStorageSync('token')
   wx.removeStorageSync('uid')
 }

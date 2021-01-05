@@ -106,6 +106,7 @@ Page({
     })
   },
   _toPayTap: function (orderId, money){
+    debugger;
     const _this = this
     if (money <= 0) {
       // 直接使用余额支付
